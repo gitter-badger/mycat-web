@@ -4,11 +4,11 @@
  */
 import axios from 'axios'
 import router from './router'
-const tokenKey = 'JEECMS-Auth-Token'
+const tokenKey = 'token'
 const timeout = 10000
 
 if (process.env.NODE_ENV === 'development') {
-    axios.defaults.baseURL = 'https://www.baidu.com'
+    axios.defaults.baseURL = 'http://192.168.1.102:9090'
 } else if (process.env.NODE_ENV === 'debug') {
     axios.defaults.baseURL = 'https://www.ceshi.com'
 } else if (process.env.NODE_ENV === 'production') {

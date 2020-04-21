@@ -16,7 +16,11 @@ public class User {
         this.password = password;
     }
 
-    public String getPassword() {
+    public User() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getPassword() {
         return password;
     }
 

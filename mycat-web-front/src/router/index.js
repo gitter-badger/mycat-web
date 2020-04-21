@@ -41,12 +41,20 @@ export default new Router({
     {
       path: '/test',
       name: 'NewHome',
+      meta: { auth: true, keepAlive: true },
       component: () => import('@/components/NewHome')
     },
     {
       path: '/houselist',
       name: 'HouseList',
+      meta: { auth: true, keepAlive: true },
       component: () => import('@/components/views/HouseList')
+    },
+    {
+      path: '/mytasklist',
+      name: 'MyTaskList',
+      meta: { auth: true, keepAlive: true },
+      component: () => import('@/components/views/MyTaskList')
     }
   ]
 })

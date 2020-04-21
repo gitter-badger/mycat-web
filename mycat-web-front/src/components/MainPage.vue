@@ -53,6 +53,15 @@ export default {
       },
       {
         color: 'pink',
+        src: 'mdi-playlist-check',
+        tip: '20',
+        title: '任务信息',
+        link: '/mytasklist',
+        note:
+          '任务信息任务信息任务信息任务信息任务信息任务信息任务信息'
+      },
+      {
+        color: 'pink',
         tip: '99',
         src: 'mdi-sticker-alert-outline',
         title: '问题汇总 ',

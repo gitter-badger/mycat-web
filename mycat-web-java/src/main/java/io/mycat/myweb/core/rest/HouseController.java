@@ -1,24 +1,18 @@
 package io.mycat.myweb.core.rest;
 
-import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -57,9 +51,8 @@ public class HouseController {
 
 	@PostMapping("/delete")
 	@ResponseBody
-	public String delete(@RequestBody House house) {
+	public String delete(@RequestBody Long id) {
 		// 未进行非空判断
-		Long id = house.getId();
 		RestResult rest = new RestResult();
 		// 未处理数据操作异常
 		houseService.deleteById(id);
@@ -70,9 +63,8 @@ public class HouseController {
 
 	@PostMapping("/selectbyid")
 	@ResponseBody
-	public String selectbyid(@RequestBody House house) {
+	public String selectbyid(@RequestBody Long id) {
 		// 未进行非空判断
-		Long id = house.getId();
 		RestResult rest = new RestResult();
 		// 未处理数据操作异常
 		House findById = houseService.findById(id).orElse(null);

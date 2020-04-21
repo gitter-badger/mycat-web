@@ -29,32 +29,35 @@ export default {
     },
     async updateItem() {
       if (this.saveact === this.comutil.FormInfo.ActRetainInput) {
-        let id = this.comutil.CURDDialog.itemId
-       console.log('HouseUpdate_methods:fetchFormData_itemId---' + id)
-      // 获取表单数据
-       let formdata = this.meta.formdata
-       formdata.id = id
-        console.log('DomainUpdatePage_methods:updateItem_formdata---' + formdata)
+        console.log('DomainUpdatePage_methods:updateItem_formdata---' + JSON.stringify(this.meta.formdata))
       // 从data获取函数转换Form表单数据用于提交
 
         await new Promise(resolve => setTimeout(resolve, 3000))
         // 更新数据 请求参数示例：{"id":44,"name":"aaaa","email":"aafffff@fff.com","select":"Item 1"}；返回参数示例：{"status":"SUCCESS"}
-        let { data } = await this.axioscall.post(this.meta.updateurl, formdata)
-        console.log('DomainUpdatePage_methods:updateItem_responsedata---' + JSON.stringify(data))
-        // 此处返回值比较判断可用预先定义替换字符串
-        if (data.retCode === 0) {
-        console.log('DomainUpdatePage_methods:updateItem_data.status---' + data.status)
-        this.comutil.ComInfo.updateCurtime()
-        this.comutil.MessageBox.show('保存成功')
-        this.comutil.Alert.close(false)
-        this.comutil.CURDDialog.close(true)
-        return true
-        } else {
-         this.comutil.MessageBox.show('保存失败，请重试')
-         this.comutil.Alert.close(false)
-         this.comutil.CURDDialog.close(true)
-         return false
-        }
+          try {
+              let { data } = await this.axioscall.post(this.meta.updateurl, this.meta.formdata)
+              console.log('DomainUpdatePage_methods:updateItem_responsedata---' + JSON.stringify(data))
+              // 此处返回值比较判断可用预先定义替换字符串
+              if (data.retCode === 0) {
+              console.log('DomainUpdatePage_methods:updateItem_data.status---' + data.status)
+              this.comutil.ComInfo.updateCurtime()
+              this.comutil.MessageBox.show('保存成功')
+              this.comutil.Alert.close(false)
+              this.comutil.CURDDialog.close(true)
+              return true
+              } else {
+              this.comutil.MessageBox.show('保存失败，请重试')
+              this.comutil.Alert.close(false)
+              this.comutil.CURDDialog.close(true)
+              return false
+              }
+          } catch (e) {
+              console.log(' exec call error ' + e)
+              this.comutil.MessageBox.show(e)
+              return false
+          } finally {
+
+          }
       } else if (this.saveact === this.comutil.FormInfo.ActRetainInputReset) {
         console.log(' reset form  ')
         this.$refs.form.reset()
@@ -90,13 +93,10 @@ export default {
       this.comutil.Alert.showAlert(alert)
     },
     async loadformdata() {
-      let queryparam = {
-        id: this.comutil.CURDDialog.itemId
-      }
       await new Promise(resolve => setTimeout(resolve, 3000))
       // 通过id查询预修改数据 请求参数示例：{"id":44}；返回参数示例：{"data":{"select":"Item 1","name":"aaaa","email":"aafffff@fff.com"},"status":"SUCCESS"}
       try {
-      let { data } = await this.axioscall.post(this.meta.selectbyidurl, queryparam)
+      let { data } = await this.axioscall.post(this.meta.selectbyidurl, this.comutil.CURDDialog.itemId)
        console.log('HouseUpdate_methods:preloading_data---' + JSON.stringify(data))
       this.comutil.CURDDialog.isprocess = false
         if (data.retCode === 0) {

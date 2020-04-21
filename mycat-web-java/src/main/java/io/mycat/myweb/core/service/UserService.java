@@ -17,4 +17,8 @@ public class UserService {
     public Optional<User> findUserById(long userId) {
         return userDao.findById(userId);
     }
+    
+    public Iterable<User> findAll(){
+    	return userDao.findAll();
+    }
 }
