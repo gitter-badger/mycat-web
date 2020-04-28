@@ -12,12 +12,17 @@
 export default {
   data() {
     return {
+      el: '#app',
+      // 默认没有在加载数据
+      isLoading: false,
+      deltaY: 0,
       selectitems: ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
       query: {
         name: 'aaaa',
         age: 20,
         select: null
       },
+      pagenum: 0,
       createurl: './views/HouseCreate',
       updateurl: './views/HouseUpdate',
       detailurl: './views/HouseDetail',
