@@ -225,6 +225,13 @@ export default {
         // firefox
         window.addEventListener('DOMMouseScroll', this.handleScroll, false)
       }
+  },
+  destroyed: function() {
+        window.removeEventListener('scroll', this.onScroll)
+        // chrome and ie
+        window.removeEventListener('mousewheel', this.handleScroll, false)
+        // firefox
+        window.removeEventListener('DOMMouseScroll', this.handleScroll, false)
   }
 }
 </script>
